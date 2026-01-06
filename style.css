@@ -46,20 +46,21 @@ body {
   color: #333;
 }
 
-/* 버튼 영역 -> 벽돌모양 버튼 수정
+/* 버튼 영역 */
 .button-group {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
   margin-bottom: 20px;
-} */
+}
 
+/* 버튼 영역 에러 확인 중
 .button-group {
   display: flex;
   flex-direction: column;
   gap: 14px;
   margin-bottom: 20px;
-}
+} */
 
 .btn {
   display: flex;
