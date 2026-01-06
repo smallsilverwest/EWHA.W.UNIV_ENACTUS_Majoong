@@ -7,7 +7,7 @@ const guardianBtn = document.getElementById("guardianBtn");
 const police182Btn = document.getElementById("police182Btn");
 const emergencyBtn = document.getElementById("emergencyBtn");
 
-/* 보호자 */
+/* 보호자 -> 하단 코드로 수정 에러 확인 중
 if (guardianNumber) {
   guardianBtn.addEventListener("click", () => {
     window.location.href = `tel:${guardianNumber}`;
@@ -15,6 +15,29 @@ if (guardianNumber) {
 } else {
   guardianBtn.textContent = "보호자 번호 없음";
   guardianBtn.style.backgroundColor = "#999";
+}  */
+
+/* 보호자 버튼 설정 */
+if (guardianNumber) {
+  guardianBtn.href = `tel:${guardianNumber}`;
+
+  // 길게 눌러야 작동 (오작동 방지)
+  let pressTimer;
+
+  guardianBtn.addEventListener("touchstart", () => {
+    pressTimer = setTimeout(() => {
+      window.location.href = guardianBtn.href;
+    }, 1500); // 1.5초
+  });
+
+  guardianBtn.addEventListener("touchend", () => {
+    clearTimeout(pressTimer);
+  });
+
+} else {
+  guardianBtn.style.backgroundColor = "#999";
+  guardianBtn.style.pointerEvents = "none";
+  guardianBtn.querySelector("span").innerText = "없음";
 }
 
 /* 182 -> 오작동 방지를 위해서 한 번 더 물어보기 */
