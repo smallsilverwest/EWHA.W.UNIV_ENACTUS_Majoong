@@ -1,0 +1,108 @@
+/* 기본 리셋 */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+               "Noto Sans KR", sans-serif;
+}
+
+body {
+  background-color: #f5f6f8;
+  padding: 20px;
+}
+
+/* 전체 컨테이너 */
+.container {
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+/* 상단 안내 박스 */
+.notice-box {
+  background-color: #d9792b;
+  color: white;
+  border-radius: 16px;
+  padding: 18px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.notice-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.notice-sub {
+  font-size: 1.05rem;
+}
+
+/* 설명 */
+.info-box {
+  text-align: center;
+  font-size: 1rem;
+  margin-bottom: 18px;
+  color: #333;
+}
+
+/* 버튼 영역 */
+.button-group {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 88px;
+  border-radius: 16px;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 700;
+  color: white;
+}
+
+/* 버튼 색상 */
+.btn.guardian {
+  background-color: #b44b3a;
+}
+
+.btn.police {
+  background-color: #f2a23a;
+  color: #222;
+}
+
+.btn.emergency {
+  background-color: #2f66c9;
+}
+
+/* 버튼 안 숫자 */
+.btn span {
+  font-size: 1.3rem;
+  margin-top: 4px;
+}
+
+/* 하단 안내 */
+.guide-box {
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.guide-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #d9792b;
+}
+
+.guide-text {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #333;
+}
