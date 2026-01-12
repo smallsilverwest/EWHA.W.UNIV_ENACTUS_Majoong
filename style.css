@@ -17,7 +17,7 @@ body {
 /* ===== 전체 컨테이너 ===== */
 .container {
   width: 100%;
-  max-width: 390px;
+  max-width: 420px;
   padding: 16px;
 }
 
