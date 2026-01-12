@@ -1,59 +1,61 @@
-/* 기본 리셋 */
+/* ===== 기본 리셋 ===== */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
-               "Noto Sans KR", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont,
+    "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
 }
 
 body {
   background-color: #f5f6f8;
   padding: 20px;
-  justify-content: center; /* 0112 center 수정 */
+  display: flex;
+  justify-content: center;
 }
 
-/* 전체 컨테이너 */
+/* ===== 전체 컨테이너 ===== */
 .container {
-  max-width: 390px; /* 420에서 390 */
-  margin: 0 auto;
-  padding: 16px; /* padding 추가 */
+  width: 100%;
+  max-width: 390px;
+  padding: 16px;
 }
 
-/* 상단 안내 박스 */
+/* ===== 상단 안내 박스 ===== */
 .notice-box {
   background-color: #d9792b;
-  color: white;
+  color: #ffffff;
   border-radius: 16px;
-  padding: 18px;
+  padding: 20px;
   text-align: center;
   margin-bottom: 16px;
 }
 
-.notice-icon {
+.icon {
   font-size: 24px;
-  margin-button: 8px;
+  margin-bottom: 8px;
 }
 
 .notice-title {
   font-size: 1.2rem;
   font-weight: 700;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .notice-sub {
   font-size: 1.05rem;
+  line-height: 1.4;
 }
 
-/* 설명 */
+/* ===== 설명 ===== */
 .info-box {
   text-align: center;
   font-size: 1rem;
   margin-bottom: 18px;
-  color: #333;
+  color: #333333;
 }
 
-/* 버튼 영역 */
+/* ===== 버튼 영역 ===== */
 .button-group {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -71,7 +73,13 @@ body {
   text-decoration: none;
   font-size: 1rem;
   font-weight: 700;
-  color: white;
+  color: #ffffff;
+  transition: transform 0.1s ease, opacity 0.1s ease;
+}
+
+.btn:active {
+  transform: scale(0.97);
+  opacity: 0.9;
 }
 
 /* 버튼 색상 */
@@ -81,7 +89,6 @@ body {
 
 .btn.police {
   background-color: #f2a23a;
-  /* color: #222; */ -> 글씨 색상 black to white
 }
 
 .btn.emergency {
@@ -94,9 +101,9 @@ body {
   margin-top: 4px;
 }
 
-/* 하단 안내 */
+/* ===== 하단 안내 ===== */
 .guide-box {
-  background-color: #fff;
+  background-color: #ffffff;
   border-radius: 16px;
   padding: 16px;
 }
@@ -111,5 +118,5 @@ body {
 .guide-text {
   font-size: 0.95rem;
   line-height: 1.5;
-  color: #333;
+  color: #333333;
 }
