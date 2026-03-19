@@ -4,24 +4,26 @@ body {
   font-family: 'Apple SD Gothic Neo', sans-serif;
   background: #e5e5e5;
 
-  /* 🔥 중앙 정렬 (앱처럼 보이게) */
+  /* 🔥 핵심 */
   display: flex;
   justify-content: center;
+  align-items: center;
+  height: 100vh;        /* 🔥 화면 고정 */
+  overflow: hidden;     /* 🔥 배경 늘어남 방지 */
 }
 
 /* 🔥 앱 컨테이너 */
 .container {
   width: 390px;
-  height: 100vh;
+  height: 844px;        /* 🔥 완전 고정 (핵심) */
   background: #f3f4f6;
   padding: 20px;
   box-sizing: border-box;
 
-  /* 👉 앱 느낌 */
-  box-shadow: 0 0 20px rgba(0,0,0,0.1);
   border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
 
-  overflow: hidden;
+  overflow-y: auto;     /* 🔥 안에서만 스크롤 */
 }
 
 /* 상단 */
@@ -40,6 +42,7 @@ body {
   border-radius: 20px;
   position: relative;
   transition: 0.2s;
+  cursor: pointer;
 }
 
 .toggle::after {
@@ -66,7 +69,7 @@ body {
 /* 상태 텍스트 */
 #statusText {
   font-size: 13px;
-  display: none; /* 🔥 기본 숨김 */
+  display: none;
 }
 
 /* 메인 카드 */
@@ -100,13 +103,18 @@ body {
 
 .btn {
   flex: 1;
+  display: flex;                /* 🔥 줄바꿈 정렬 */
+  justify-content: center;
+  align-items: center;
   text-align: center;
+
   padding: 15px;
   border-radius: 12px;
   color: white;
   text-decoration: none;
   font-weight: bold;
   font-size: 14px;
+  line-height: 1.2;
 }
 
 /* 버튼 색상 */
@@ -152,13 +160,13 @@ body {
   margin: 3px 0;
 }
 
-/* 👤 프로필 (user.html용) */
+/* 👤 프로필 */
 .profile {
   width: 80px;
   height: 80px;
   background: #ddd;
   border-radius: 50%;
-  margin: 20px auto;
+  margin: 10px auto;
 }
 
 /* 👤 정보 박스 */
@@ -174,10 +182,5 @@ body {
 /* 제목 */
 .title {
   text-align: center;
-  margin-top: 10px;
-}
-
-/* 프로필 여백 보정 */
-.profile {
   margin-top: 10px;
 }
