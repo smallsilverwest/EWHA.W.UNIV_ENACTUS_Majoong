@@ -1,28 +1,71 @@
 body {
-  font-family: 'Arial', sans-serif;
-  background: #f2f2f2;
+  margin: 0;
+  font-family: 'Apple SD Gothic Neo', sans-serif;
+  background: #f3f4f6;
   padding: 20px;
+}
+
+/* 상단 */
+.top-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.toggle {
+  width: 40px;
+  height: 22px;
+  background: #ccc;
+  border-radius: 20px;
+  position: relative;
+}
+
+.toggle::after {
+  content: "";
+  width: 18px;
+  height: 18px;
+  background: white;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  border-radius: 50%;
+}
+
+#statusText {
+  font-size: 13px;
+}
+
+/* 메인 카드 */
+.main-card {
+  background: #d9772b;
+  color: white;
+  padding: 25px;
+  border-radius: 20px;
   text-align: center;
 }
 
-/* 카드 */
-.card {
-  background: #d9772b;
-  color: white;
-  padding: 20px;
-  border-radius: 20px;
-  margin-bottom: 20px;
+.siren {
+  font-size: 24px;
+  margin-bottom: 10px;
 }
 
-/* 버튼 공통 */
+/* 설명 */
+.desc {
+  text-align: center;
+  margin: 20px 0;
+  color: #444;
+}
+
+/* 버튼 */
 .btn-group {
   display: flex;
-  justify-content: space-between;
   gap: 10px;
 }
 
 .btn {
   flex: 1;
+  text-align: center;
   padding: 15px;
   border-radius: 12px;
   color: white;
@@ -30,32 +73,40 @@ body {
   font-weight: bold;
 }
 
-/* 버튼 색상 */
 .red { background: #b5483a; }
 .orange { background: #f4a62a; }
 .blue { background: #3b6cc4; }
 
-/* 안내 박스 */
-.guide-box {
+/* 말풍선 */
+.speech {
   background: #eee;
   padding: 15px;
   border-radius: 12px;
   margin-top: 20px;
+  font-size: 14px;
 }
 
 /* 정보 버튼 */
 .info-link {
   display: block;
-  margin-top: 20px;
+  text-align: center;
+  margin: 20px 0;
   color: #d9772b;
   font-weight: bold;
 }
 
-/* 실종 배너 */
-#missingBanner {
-  background: #b5483a;
-  color: white;
-  padding: 10px;
-  border-radius: 20px;
-  margin-bottom: 10px;
+/* 푸터 */
+.footer {
+  text-align: center;
+  font-size: 11px;
+  color: #777;
+}
+
+.brand {
+  color: #d9772b;
+  font-weight: bold;
+}
+
+.small {
+  margin: 3px 0;
 }
