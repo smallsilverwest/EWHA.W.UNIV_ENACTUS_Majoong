@@ -8,20 +8,26 @@
 </head>
 <body class="bg-gray-50 flex justify-center">
     <div class="w-full max-w-md min-h-screen bg-white shadow-lg flex flex-col relative">
-        <div id="missing-banner" class="hidden bg-red-600 text-white text-center py-2 text-sm font-bold sticky top-0">
+        <div id="missing-banner" class="hidden bg-red-600 text-white text-center py-3 text-sm font-bold sticky top-0 z-50">
             ● 현재, 실종 신고가 접수된 어르신입니다. ●
         </div>
 
-        <div class="p-6 text-center mt-10">
-            <h1 class="text-2xl font-bold text-gray-800 mb-2">마중안심밴드</h1>
-            <p class="text-gray-500 mb-10">어르신의 안전한 귀가를 돕습니다.</p>
+        <div class="p-8 text-center mt-16">
+            <h1 class="text-3xl font-extrabold text-gray-900 mb-2">마중</h1>
+            <p class="text-gray-500 mb-12">안심밴드를 통해 소중한 가족을 찾습니다.</p>
             
-            <div id="status-card" class="bg-blue-50 border border-blue-100 rounded-3xl p-8 mb-8">
+            <div id="status-card" class="bg-blue-50 border border-blue-100 rounded-3xl p-10 mb-10 transition-colors duration-500">
+                <div id="status-icon" class="text-4xl mb-3">💙</div>
                 <p id="status-text" class="text-blue-600 font-bold text-lg">어르신 정보를 확인하시겠습니까?</p>
             </div>
 
-            <a href="info.html" class="block w-full bg-blue-600 text-white py-4 rounded-2xl font-bold text-lg mb-4">어르신 정보 확인하기</a>
-            <a href="admin.html" class="block w-full text-gray-400 py-2 text-sm">보호자 관리 모드</a>
+            <button onclick="location.href='info.html'" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-5 rounded-2xl font-bold text-lg shadow-lg mb-6 transition-all">
+                어르신 정보 확인하기
+            </button>
+            
+            <button onclick="location.href='admin.html'" class="text-gray-400 py-2 text-sm underline underline-offset-4">
+                보호자 관리 모드
+            </button>
         </div>
     </div>
 
@@ -29,16 +35,40 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-        const firebaseConfig = { /* 본인의 Config 복사 */ };
+        const firebaseConfig = {
+            apiKey: "AIzaSyBphUEAQmK1XXYnNcQYK5NEOFDfxleNaAQ",
+            authDomain: "majung-260402v1.firebaseapp.com",
+            projectId: "majung-260402v1",
+            storageBucket: "majung-260402v1.firebasestorage.app",
+            messagingSenderId: "18043440169",
+            appId: "1:18043440169:web:f5f131e3fa0426ef126038",
+            measurementId: "G-4CHSF7NFGR"
+        };
+
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        onSnapshot(doc(db, "elders", "elder01"), (doc) => {
-            if (doc.exists() && doc.data().isMissing) {
-                document.getElementById('missing-banner').classList.remove('hidden');
-                document.getElementById('status-card').className = "bg-red-50 border border-red-100 rounded-3xl p-8 mb-8";
-                document.getElementById('status-text').innerText = "🚨 현재 실종 신고 상태입니다!";
-                document.getElementById('status-text').className = "text-red-600 font-bold text-lg";
+        onSnapshot(doc(db, "elders", "elder01"), (docSnap) => {
+            if (docSnap.exists()) {
+                const isMissing = docSnap.data().isMissing;
+                const banner = document.getElementById('missing-banner');
+                const card = document.getElementById('status-card');
+                const text = document.getElementById('status-text');
+                const icon = document.getElementById('status-icon');
+
+                if (isMissing) {
+                    banner.classList.remove('hidden');
+                    card.className = "bg-red-50 border border-red-100 rounded-3xl p-10 mb-10";
+                    text.innerText = "🚨 현재 실종 신고 상태입니다!";
+                    text.className = "text-red-600 font-bold text-lg";
+                    icon.innerText = "🚩";
+                } else {
+                    banner.classList.add('hidden');
+                    card.className = "bg-blue-50 border border-blue-100 rounded-3xl p-10 mb-10";
+                    text.innerText = "어르신 정보를 확인하시겠습니까?";
+                    text.className = "text-blue-600 font-bold text-lg";
+                    icon.innerText = "💙";
+                }
             }
         });
     </script>
