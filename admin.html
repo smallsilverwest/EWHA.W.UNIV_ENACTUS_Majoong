@@ -159,7 +159,7 @@
         // 2. 실종 상태 토글 함수
         window.toggleMissing = async () => {
             await updateDoc(docRef, { isMissing: !currentMissingStatus });
-            alert(currentMissingStatus ? "실종 신고가 해제되었습니다." : "실종 신고가 등록되었습니다.");
+            alert(currentMissingStatus ? "실종 신고가 등록되었습니다." : "실종 신고가 해제제되었습니다.");
         };
         document.getElementById('toggle-btn').onclick = window.toggleMissing;
 
