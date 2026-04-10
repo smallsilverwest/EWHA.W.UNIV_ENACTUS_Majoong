@@ -8,6 +8,8 @@
     <style>
         .hidden { display: none !important; }
         .transition-all { transition: all 0.4s ease-in-out; }
+        /* 로딩 시 폰트 튀는 현상 방지용 기본 스타일 */
+        #status-main-text { min-height: 3.5rem; }
     </style>
 </head>
 <body class="bg-gray-100 flex justify-center text-gray-800 font-sans">
@@ -15,7 +17,6 @@
 
         <div class="relative w-full border-b flex justify-between items-center px-6 py-4 bg-white sticky top-0 z-50">
             <h1 id="header-title" class="text-lg font-bold text-gray-900 transition-all">마중안심밴드</h1>
-            
             <button onclick="location.href='admin.html'" class="bg-white text-orange-600 px-3 py-1.5 rounded-lg font-black text-xs border-2 border-orange-600 shadow-sm active:scale-95 transition-all">
                 보호자 관리
             </button>
@@ -29,9 +30,7 @@
                 <h2 id="status-main-text" class="text-2xl font-black mb-2 leading-tight tracking-tight transition-all text-gray-900">
                     불러오는 중...
                 </h2>
-                <p id="status-sub-text" class="text-sm font-medium transition-all text-gray-500">
-                    -
-                </p>
+                <p id="status-sub-text" class="text-sm font-medium transition-all text-gray-500">-</p>
             </div>
 
             <div class="w-full px-1">
@@ -41,20 +40,13 @@
                 
                 <div class="grid grid-cols-3 gap-3 mb-6 font-black text-white">
                     <a id="call-guardian" href="#" class="bg-red-600 text-center py-5 rounded-3xl shadow-lg flex flex-col items-center justify-center active:scale-95 transition-all">
-                        <span class="text-lg font-black leading-tight">
-                            보호자<br>연결
-                        </span>
+                        <span class="text-lg leading-tight">보호자<br>연결</span>
                     </a>
-                    
                     <a href="tel:182" class="bg-orange-500 text-center py-5 rounded-3xl shadow-lg flex flex-col items-center active:scale-95 transition-all">
-                        <span class="text-lg font-black leading-tight">
-                            실종<br>신고
-                        </span>
+                        <span class="text-lg leading-tight">실종<br>신고</span>
                     </a>
                     <a href="tel:112" class="bg-blue-600 text-center py-5 rounded-3xl shadow-lg flex flex-col items-center active:scale-95 transition-all">
-                        <span class="text-lg font-black leading-tight">
-                            경찰<br>연결
-                        </span>
+                        <span class="text-lg leading-tight">경찰<br>연결</span>
                     </a>
                 </div>
 
@@ -99,6 +91,9 @@
         const urlParams = new URLSearchParams(window.location.search);
         const elderId = urlParams.get('id') || "elder01";
 
+        // 글씨 크기 제어를 위한 공통 클래스 상수화
+        const MAIN_TEXT_SIZE = "text-2xl"; 
+
         onSnapshot(doc(db, "elders", elderId), (docSnap) => {
             if (docSnap.exists()) {
                 const data = docSnap.data();
@@ -112,25 +107,28 @@
                 const guideText = document.getElementById('call-guide-text');
                 const locHighlight = document.getElementById('location-highlight');
 
+                // 기본 폰트 크기 강제 적용 (text-2xl)
+                const baseClass = `${MAIN_TEXT_SIZE} font-black mb-2 leading-tight tracking-tight transition-all`;
+
                 if (isMissing) {
                     headerTitle.className = "text-lg font-bold text-red-600 transition-all";
                     card.className = "w-full mb-6 text-center rounded-[2.5rem] p-10 transition-all border-2 border-red-200 bg-red-50 shadow-md";
                     emoji.innerText = "🚨";
-                    mainText.innerHTML = "실종 신고가 등록된 어르신입니다.";
-                    mainText.className = "text-2xl font-black mb-2 leading-tight tracking-tight text-red-600 transition-all";
+                    mainText.innerHTML = "실종 신고가 등록된<br>어르신입니다.";
+                    mainText.className = `${baseClass} text-red-600`;
                     subText.innerText = "아래 연락처로 즉시 전화해 주세요.";
                     subText.className = "text-sm font-bold text-red-500 animate-pulse transition-all";
-                    guideText.className = "flex items-center mb-4 text-[13px] font-black text-red-600 transition-all";
+                    guideText.className = "flex items-center mb-4 text-[14px] font-black text-red-600 transition-all";
                     locHighlight.className = "text-red-600 font-bold transition-all";
                 } else {
                     headerTitle.className = "text-lg font-bold text-gray-900 transition-all";
                     card.className = "w-full mb-6 text-center rounded-[2.5rem] p-10 transition-all border border-gray-200 bg-white shadow-sm";
                     emoji.innerText = "🚨";
-                    mainText.innerHTML = "도움이 필요한 어르신입니다.";
-                    mainText.className = "text-2xl font-black mb-2 leading-tight tracking-tight text-gray-900 transition-all";
+                    mainText.innerHTML = "도움이 필요한 어르신을<br>발견하셨나요?";
+                    mainText.className = `${baseClass} text-gray-900`;
                     subText.innerText = "정보 확인이 필요하면 아래 버튼을 눌러주세요.";
                     subText.className = "text-sm font-medium text-gray-500 transition-all";
-                    guideText.className = "flex items-center mb-4 text-[13px] font-bold text-blue-600 transition-all";
+                    guideText.className = "flex items-center mb-4 text-[14px] font-bold text-blue-600 transition-all";
                     locHighlight.className = "text-blue-600 font-bold transition-all";
                 }
                 
