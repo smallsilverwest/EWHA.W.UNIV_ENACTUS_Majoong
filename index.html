@@ -114,7 +114,7 @@
         }
         trackLocation();
 
-        onSnapshot(doc(db, "Users", eldrId), (docSnap) => {
+        onSnapshot(doc(db, "Users", elderId), (docSnap) => {
             if (docSnap.exists()) {
                 const data = docSnap.data();
                 const isMissing = data.isMissing;
