@@ -105,15 +105,16 @@
             const icon = document.getElementById('status-icon');
             const btn = document.getElementById('toggle-btn');
             const timeElement = document.getElementById('last-update');
-
+        
             // 1. 시간 정보
             let timeText = data.updateTime?.toDate ? data.updateTime.toDate().toLocaleString() : "-";
             
-            // 2. 발견 위치 확인 버튼 로직 (중요!)
+            // 2. 발견 위치 확인 버튼 로직 (수정됨)
             let locationHtml = "";
             if (data.updateLoc) {
                 const lat = data.updateLoc.latitude;
                 const lng = data.updateLoc.longitude;
+                // 표준 구글 지도 좌표 검색 링크로 수정
                 const mapUrl = `https://www.google.com/maps?q=${lat},${lng}`;
                 
                 locationHtml = `
@@ -121,14 +122,14 @@
                         <span class="text-orange-500 font-bold text-[11px] mb-2">📍 마지막 태깅 위치 발견</span>
                         <a href="${mapUrl}" target="_blank" 
                            class="bg-orange-50 border border-orange-200 px-4 py-2 rounded-full text-[12px] text-orange-600 font-bold active:scale-95 transition-all">
-                           지도에서 위치 확인하기 ↗
+                            지도에서 위치 확인하기 ↗
                         </a>
                     </div>
                 `;
             }
-
+        
             timeElement.innerHTML = `마지막 업데이트: ${timeText} ${locationHtml}`;
-
+        
             // 3. 실종 상태에 따른 카드 디자인
             if (data.isMissing) {
                 card.className = "w-full mb-6 text-center border-2 border-red-100 bg-red-50 rounded-[2rem] p-10 shadow-sm mt-4";
@@ -145,7 +146,7 @@
                 btn.innerText = "실종 신고 등록하기";
                 btn.className = "w-full py-5 rounded-3xl font-black text-xl shadow-lg bg-red-600 text-white active:scale-95 mb-4";
             }
-
+        
             btn.onclick = async () => {
                 await updateDoc(docRef, { isMissing: !data.isMissing });
             };
