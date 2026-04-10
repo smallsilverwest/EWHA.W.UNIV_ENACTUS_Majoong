@@ -24,11 +24,11 @@
             <p class="text-gray-400 text-sm mb-8">PIN을 입력하세요</p>
             
             <input id="pin-input" type="password" maxlength="4" 
-                class="w-full border-2 rounded-2xl p-4 text-center text-2xl mb-4 focus:border-blue-500 outline-none transition-all" 
+                class="w-full border-2 rounded-2xl p-4 text-center text-2xl mb-4 focus:border-orange-500 outline-none transition-all" 
                 placeholder="PIN 4자리">
             
             <button id="btn-login" 
-                class="w-full bg-orange-600 text-white py-4 rounded-2xl font-bold mb-4 active:scale-95 transition-all shadow-md">
+                class="w-full bg-orange-500 text-white py-4 rounded-2xl font-bold mb-4 active:scale-95 transition-all shadow-md">
                 로그인
             </button>
         </div>
@@ -60,7 +60,7 @@
             </div>
 
             <div id="content-info" class="hidden space-y-5">
-                <div><label class="text-xs text-gray-500 font-bold mb-1 block">이름</label><input id="info-name" type="text" class="w-full border rounded-2xl p-4 bg-gray-50 outline-none focus:border-blue-500"></div>
+                <div><label class="text-xs text-gray-500 font-bold mb-1 block">이름</label><input id="info-name" type="text" class="w-full border rounded-2xl p-4 bg-gray-50 outline-none focus:border-orange-500"></div>
                 <div class="flex gap-4">
                     <div class="flex-1"><label class="text-xs text-gray-500 font-bold mb-1 block">성별</label><select id="info-gender" class="w-full border rounded-2xl p-4 bg-gray-50"><option value="남">남</option><option value="여">여</option></select></div>
                     <div class="flex-1"><label class="text-xs text-gray-500 font-bold mb-1 block">나이</label><input id="info-age" type="number" class="w-full border rounded-2xl p-4 bg-gray-50"></div>
@@ -70,14 +70,14 @@
                 <div><label class="text-xs text-gray-500 font-bold mb-1 block">등록 센터</label><input id="info-center" type="text" class="w-full border rounded-2xl p-4 bg-gray-50"></div>
                 <div><label class="text-xs text-gray-500 font-bold mb-1 block">보호자 연락처</label><input id="info-guardian-phone" type="tel" class="w-full border rounded-2xl p-4 bg-gray-50"></div>
                 <div><label class="text-xs text-gray-500 font-bold mb-1 block">센터 연락처</label><input id="info-center-phone" type="tel" class="w-full border rounded-2xl p-4 bg-gray-50"></div>
-                <button id="btn-save-info" class="w-full bg-blue-600 text-white py-5 rounded-3xl font-black text-lg shadow-lg active:scale-95 transition-all mt-4">저장하기</button>
+                <button id="btn-save-info" class="w-full bg-orange-500 text-white py-5 rounded-3xl font-black text-lg shadow-lg active:scale-95 transition-all mt-4">저장하기</button>
             </div>
 
             <div id="content-pin" class="hidden">
                 <div class="bg-gray-50 border border-gray-100 rounded-2xl p-6 mb-8 text-sm text-gray-500 text-center mt-4">PIN은 숫자 4자리로 설정해 주세요.</div>
                 <div class="space-y-6">
-                    <input id="new-pin" type="password" maxlength="4" class="w-full border rounded-2xl p-4 bg-gray-50 outline-none focus:border-blue-500" placeholder="새 PIN 4자리">
-                    <input id="confirm-pin" type="password" maxlength="4" class="w-full border rounded-2xl p-4 bg-gray-50 outline-none focus:border-blue-500" placeholder="새 PIN 재입력">
+                    <input id="new-pin" type="password" maxlength="4" class="w-full border rounded-2xl p-4 bg-gray-50 outline-none focus:border-orange-500" placeholder="새 PIN 4자리">
+                    <input id="confirm-pin" type="password" maxlength="4" class="w-full border rounded-2xl p-4 bg-gray-50 outline-none focus:border-orange-500" placeholder="새 PIN 재입력">
                     <button id="btn-change-pin" class="w-full bg-gray-300 text-white py-5 rounded-3xl font-black text-lg shadow-sm mt-8 cursor-not-allowed" disabled>PIN 변경하기</button>
                 </div>
             </div>
