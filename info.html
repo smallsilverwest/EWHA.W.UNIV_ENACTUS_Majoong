@@ -9,7 +9,7 @@
 <body class="bg-gray-50 flex justify-center">
     <div class="w-full max-w-md min-h-screen bg-white shadow-lg flex flex-col">
         <div class="p-5 border-b flex items-center bg-white sticky top-0 z-10">
-            <button id="btn-back" class="mr-4 text-2xl">←</button>
+            <button id="btn-back" class="mr-4 text-2xl active:scale-90 transition-transform">←</button>
             <h1 class="font-bold text-lg">어르신 정보</h1>
         </div>
 
@@ -17,7 +17,7 @@
             <div class="bg-slate-50 rounded-3xl p-8 border border-slate-100 mb-8 shadow-sm">
                 <h2 id="name" class="text-3xl font-black text-gray-800 mb-8 tracking-tight">불러오는 중...</h2>
                 <div class="space-y-6">
-                    <div><p class="text-xs text-gray-400 font-bold uppercase tracking-wider mb-1">나이 / 성</p><p id="age-gender" class="text-xl font-bold text-gray-700">-</p></div>
+                    <div><p class="text-xs text-gray-400 font-bold uppercase tracking-wider mb-1">나이 / 성별</p><p id="age-gender" class="text-xl font-bold text-gray-700">-</p></div>
                     <div><p class="text-xs text-gray-400 font-bold uppercase tracking-wider mb-1">거주지 주소</p><p id="address" class="text-lg font-bold text-gray-700">-</p></div>
                     <div><p class="text-xs text-gray-400 font-bold uppercase tracking-wider mb-1">관할 경찰서</p><p id="police" class="text-lg font-bold text-gray-700">-</p></div>
                     <div><p class="text-xs text-gray-400 font-bold uppercase tracking-wider mb-1">등록 센터</p><p id="center" class="text-lg font-bold text-gray-700">-</p></div>
@@ -25,8 +25,8 @@
             </div>
 
             <div class="grid grid-cols-2 gap-4">
-                <a id="call-guardian" href="#" class="bg-red-600 hover:bg-bred-700 text-white text-center py-5 rounded-2xl font-bold shadow-md transition-all">보호자 연락</a>
-                <a id="call-center" href="#" class="bg-orange-500 hover:bg-orange-600 text-white text-center py-5 rounded-2xl font-bold shadow-md transition-all">센터 연락</a>
+                <a id="call-guardian" href="#" class="bg-red-600 hover:bg-red-700 text-white text-center py-5 rounded-2xl font-bold shadow-md active:scale-95 transition-all">보호자 연락</a>
+                <a id="call-center" href="#" class="bg-orange-500 hover:bg-orange-600 text-white text-center py-5 rounded-2xl font-bold shadow-md active:scale-95 transition-all">센터 연락</a>
             </div>
         </div>
     </div>
@@ -49,21 +49,34 @@
         const db = getFirestore(app);
 
         const urlParams = new URLSearchParams(window.location.search);
-        const elderId = urlParams.get('id') || "elder01";
+        // [반영] 기본값 demo로 변경
+        const elderId = urlParams.get('id') || "demo"; 
+        
         document.getElementById('btn-back').onclick = () => location.href = `index.html?id=${elderId}`;
 
         async function loadData() {
-            const docRef = doc(db, "elders", elderId);
+            // [반영] 컬렉션명 Users로 변경
+            const docRef = doc(db, "Users", elderId);
             const docSnap = await getDoc(docRef);
+            
             if (docSnap.exists()) {
                 const data = docSnap.data();
-                document.getElementById('name').innerText = `${data.name})`;
-                document.getElementById('age-gender').innerText = `${data.age}세, (${data.gender})`;
-                document.getElementById('address').innerText = data.address;
-                document.getElementById('police').innerText = data.police_loc; // 필드명 통일
-                document.getElementById('center').innerText = data.center_loc; // 필드명 통일
-                document.getElementById('call-guardian').href = "tel:" + data.guardian_phone;
-                document.getElementById('call-center').href = "tel:" + data.center_phone;
+                
+                // 데이터 렌더링
+                document.getElementById('name').innerText = data.name || "정보 없음";
+                document.getElementById('age-gender').innerText = `${data.age || "-"}세 (${data.gender || "-"})`;
+                document.getElementById('address').innerText = data.address || "-";
+                
+                // [반영] DB 필드명에 맞춰 police_loc, center_loc 사용
+                document.getElementById('police').innerText = data.police_loc || "-"; 
+                document.getElementById('center').innerText = data.center_loc || "-"; 
+                
+                // [반영] DB 필드명에 맞춰 guardian_phone, center_phone 사용
+                document.getElementById('call-guardian').href = "tel:" + (data.guardian_phone || "");
+                document.getElementById('call-center').href = "tel:" + (data.center_phone || "");
+            } else {
+                document.getElementById('name').innerText = "데이터 오류";
+                console.error("No such document in 'Users' collection with ID:", elderId);
             }
         }
         loadData();
