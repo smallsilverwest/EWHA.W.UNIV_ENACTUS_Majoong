@@ -32,41 +32,67 @@
     </div>
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    // 1. 필요한 Firebase 함수 임포트
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyBphUEAQmK1XXYnNcQYK5NEOFDfxleNaAQ",
-            authDomain: "majung-260402v1.firebaseapp.com",
-            projectId: "majung-260402v1",
-            storageBucket: "majung-260402v1.firebasestorage.app",
-            messagingSenderId: "18043440169",
-            appId: "1:18043440169:web:f5f131e3fa0426ef126038",
-            measurementId: "G-4CHSF7NFGR"
-        };
+    // 2. 최신 Firebase 설정값 적용 (safeloop-majung 프로젝트)
+    const firebaseConfig = {
+        apiKey: "AIzaSyARCEpqFrnnCg6bbDzC7etXK_Ypnyc_1yY",
+        authDomain: "safeloop-majung.firebaseapp.com",
+        projectId: "safeloop-majung",
+        storageBucket: "safeloop-majung.firebasestorage.app",
+        messagingSenderId: "1031230129161",
+        appId: "1:1031230129161:web:5d164644d2a9857f5aa4d8",
+        measurementId: "G-KPX19HQ2JG"
+    };
 
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
 
-        const urlParams = new URLSearchParams(window.location.search);
-        const elderId = urlParams.get('id') || "elder01";
-        document.getElementById('btn-back').onclick = () => location.href = `index.html?id=${elderId}`;
+    // 3. URL 파라미터에서 ID 추출 (기본값 'demo')
+    const urlParams = new URLSearchParams(window.location.search);
+    const elderId = urlParams.get('id') || "demo";
 
-        async function loadData() {
-            const docRef = doc(db, "elders", elderId);
-            const docSnap = await getDoc(docRef);
-            if (docSnap.exists()) {
-                const data = docSnap.data();
-                document.getElementById('name').innerText = `${data.name}, (${data.gender})`;
-                document.getElementById('age-gender').innerText = `${data.age}세`;
-                document.getElementById('address').innerText = data.address;
-                document.getElementById('police').innerText = data.police_loc; // 필드명 통일
-                document.getElementById('center').innerText = data.center_loc; // 필드명 통일
-                document.getElementById('call-guardian').href = "tel:" + data.guardian_phone;
-                document.getElementById('call-center').href = "tel:" + data.center_phone;
+    // 뒤로가기 버튼 동작 (ID 유지)
+    document.getElementById('btn-back').onclick = () => {
+        location.href = `index.html?id=${elderId}`;
+    };
+
+    // 4. 데이터 로드 함수
+    async function loadData() {
+        // 'Users' 컬렉션의 elderId 문서 참조
+        const docRef = doc(db, "Users", elderId);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            const data = docSnap.data();
+
+            // UI 요소에 데이터 바인딩 (이미지 속 필드명과 일치시킴)
+            document.getElementById('name').innerText = `${data.name || '이름 없음'} (${data.gender || '-'})`;
+            document.getElementById('age-gender').innerText = `${data.age || '-'}세`;
+            document.getElementById('address').innerText = data.address || "등록된 주소 없음";
+            
+            // 이미지에서 확인된 필드명: police_loc, center_loc
+            document.getElementById('police').innerText = data.police_loc || "정보 없음";
+            document.getElementById('center').innerText = data.center_loc || "정보 없음";
+
+            // 전화 연결 링크 설정 (DB 필드명: guardian_phone, center_phone)
+            const guardianCall = document.getElementById('call-guardian');
+            const centerCall = document.getElementById('call-center');
+
+            if (data.guardian_phone) {
+                guardianCall.href = "tel:" + data.guardian_phone;
             }
+            if (data.center_phone) {
+                centerCall.href = "tel:" + data.center_phone;
+            }
+        } else {
+            document.getElementById('name').innerText = "사용자 정보를 찾을 수 없습니다.";
         }
-        loadData();
-    </script>
+    }
+
+    loadData();
+</script>
 </body>
 </html>
