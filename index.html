@@ -121,7 +121,6 @@
                 emoji.innerText = "🚨";
                 mainText.innerHTML = `
                     <span class="block text-red-600">실종 신고가 등록된 어르신입니다.</span>
-                    // <span class="block text-red-600">어르신입니다.</span>
                     <p class="text-sm font-medium text-red-400 mt-3">
                         발견 즉시 아래 버튼을 통해 연락해 주세요.
                     </p>
@@ -133,12 +132,12 @@
                 emoji.innerText = "🚨";
                 mainText.innerHTML = `
                     <span class="block text-gray-900">도움이 필요한 어르신입니다.</span>
-                    // <span class="block text-gray-900">어르신입니다.</span>
                     <p class="text-sm font-medium text-gray-400 mt-3">
                         아래 버튼을 통해 어르신의 정보를 확인해 주세요.
                     </p>
                 `;
-                statusCard.className = "w-full mb-6 text-center rounded-[2.5rem] p-10 transition-all border-2 border-gray-300 bg-white shadow-md";
+                // statusCard.className = "w-full mb-6 text-center rounded-[2.5rem] p-10 transition-all border-2 border-gray-300 bg-white shadow-md";
+                statusCard.className = "w-full mb-6 text-center rounded-[2.5rem] p-10 transition-all border-2 border-red-500 bg-red-50 shadow-md";
                 mainText.className = "text-2xl font-black mb-2 leading-tight text-gray-900 break-keep";
             }
 
